@@ -25,17 +25,17 @@ public class ConsoleGame implements Game {
         String lettersUsed = "";
         String guesses = repeat("_ ", word.length());
         int badGuessCount = 0;
-        while (badGuessCount < 6 && !matched.equals(repeat("_", word.length()))) {
+        while (areBadGuessesValid(badGuessCount) && !isMatched(word, matched)) {
             ui.showGallows(badGuessCount);
             ui.showGuesses(guesses);
             ui.showNextGuessPrompt();
             char guess = ui.getGuess();
 
-            if (lettersUsed.indexOf(guess) >= 0) {
+            if (isAlreadyGuessed(lettersUsed, guess)) {
                 ui.showAlreadyGuessed(guesses);
             } else {
                 lettersUsed += guess;
-                if (matched.indexOf(guess) >= 0) {
+                if (isAlreadyGuessed(matched, guess)) {
                     String newGuesses = "";
                     for (int i = 0; i < word.length(); ++i) {
                         if (word.charAt(i) == guess) {
@@ -54,11 +54,23 @@ public class ConsoleGame implements Game {
                     }
                 }
             }
-            if (matched.equals(repeat("_", word.length()))) {
+            if (isMatched(word, matched)) {
                 ui.showGallows(badGuessCount);
                 ui.showGuesses(guesses);
                 ui.showYouWon();
             }
         }
+    }
+
+    private boolean areBadGuessesValid(int badGuessCount) {
+        return badGuessCount < 6;
+    }
+
+    private boolean isAlreadyGuessed(String lettersUsed, char guess) {
+        return lettersUsed.indexOf(guess) >= 0;
+    }
+
+    private boolean isMatched(String word, String matched) {
+        return matched.equals(repeat("_", word.length()));
     }
 }

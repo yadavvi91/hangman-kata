@@ -4,10 +4,20 @@ public class ConsoleGame implements Game {
 
     private final UI ui;
     private final Dictionary dictionary;
+    private final String word;
+    private String matched;
+    private String lettersUsed;
+    private String guesses;
+    private int badGuessCount;
 
     public ConsoleGame(UI ui, Dictionary dictionary) {
         this.ui = ui;
         this.dictionary = dictionary;
+        word = this.dictionary.selectWord();
+        matched = word;
+        lettersUsed = "";
+        guesses = repeat("_ ", word.length());
+        badGuessCount = 0;
     }
 
     private String mid(String text, int start, int length) {
@@ -20,12 +30,7 @@ public class ConsoleGame implements Game {
 
     @Override
     public void play() {
-        String word = dictionary.selectWord();
-        String matched = word;
-        String lettersUsed = "";
-        String guesses = repeat("_ ", word.length());
-        int badGuessCount = 0;
-        while (areBadGuessesValid(badGuessCount) && !isMatched(word, matched)) {
+        while (areBadGuessesValid() && !isAMatch(word, matched)) {
             ui.showGallows(badGuessCount);
             ui.showGuesses(guesses);
             ui.showNextGuessPrompt();
@@ -35,25 +40,26 @@ public class ConsoleGame implements Game {
                 ui.showAlreadyGuessed(guesses);
             } else if (isAlreadyGuessed(matched, guess)) {
                 lettersUsed += guess;
-                guesses = getNewGuesses(word, guesses, guess);
+                guesses = getNewGuesses(guess);
                 matched = matched.replace(guess, '_');
             } else {
                 lettersUsed += guess;
                 badGuessCount++;
-                if (badGuessCount == 6) {
-                    ui.showGallows(badGuessCount);
-                    break;
-                }
             }
-            if (isMatched(word, matched)) {
-                ui.showGallows(badGuessCount);
-                ui.showGuesses(guesses);
-                ui.showYouWon();
-            }
+        }
+        // is word correctly guessed
+        if (isAMatch(word, matched)) {
+            ui.showGallows(badGuessCount);
+            ui.showGuesses(guesses);
+            ui.showYouWon();
+        }
+        // is word incorrectly guessed
+        if (!areBadGuessesValid()) {
+            ui.showGallows(badGuessCount);
         }
     }
 
-    private String getNewGuesses(String word, String guesses, char guess) {
+    private String getNewGuesses(char guess) {
         String newGuesses = "";
         for (int i = 0; i < word.length(); ++i) {
             if (word.charAt(i) == guess) {
@@ -65,7 +71,7 @@ public class ConsoleGame implements Game {
         return newGuesses;
     }
 
-    private boolean areBadGuessesValid(int badGuessCount) {
+    private boolean areBadGuessesValid() {
         return badGuessCount < 6;
     }
 
@@ -73,7 +79,7 @@ public class ConsoleGame implements Game {
         return lettersUsed.indexOf(guess) >= 0;
     }
 
-    private boolean isMatched(String word, String matched) {
+    private boolean isAMatch(String word, String matched) {
         return matched.equals(repeat("_", word.length()));
     }
 }

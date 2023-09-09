@@ -36,9 +36,9 @@ public class ConsoleGame implements Game {
             ui.showNextGuessPrompt();
             char guess = ui.getGuess();
 
-            if (isAlreadyGuessed(lettersUsed, guess)) {
+            if (isAlreadyGuessed(guess)) {
                 ui.showAlreadyGuessed(guesses);
-            } else if (isAlreadyGuessed(matched, guess)) {
+            } else if (isGuessACharInWord(guess)) {
                 lettersUsed += guess;
                 guesses = getNewGuesses(guess);
                 matched = matched.replace(guess, '_');
@@ -75,8 +75,12 @@ public class ConsoleGame implements Game {
         return badGuessCount < 6;
     }
 
-    private boolean isAlreadyGuessed(String lettersUsed, char guess) {
+    private boolean isAlreadyGuessed(char guess) {
         return lettersUsed.indexOf(guess) >= 0;
+    }
+
+    private boolean isGuessACharInWord(char guess) {
+        return matched.indexOf(guess) >= 0;
     }
 
     private boolean isAMatch(String word, String matched) {

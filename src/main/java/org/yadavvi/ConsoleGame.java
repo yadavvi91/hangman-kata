@@ -35,15 +35,7 @@ public class ConsoleGame implements Game {
                 ui.showAlreadyGuessed(guesses);
             } else if (isAlreadyGuessed(matched, guess)) {
                 lettersUsed += guess;
-                String newGuesses = "";
-                for (int i = 0; i < word.length(); ++i) {
-                    if (word.charAt(i) == guess) {
-                        newGuesses += guess + " ";
-                    } else {
-                        newGuesses += mid(guesses, i * 2, 2);
-                    }
-                }
-                guesses = newGuesses;
+                guesses = getNewGuesses(word, guesses, guess);
                 matched = matched.replace(guess, '_');
             } else {
                 lettersUsed += guess;
@@ -59,6 +51,18 @@ public class ConsoleGame implements Game {
                 ui.showYouWon();
             }
         }
+    }
+
+    private String getNewGuesses(String word, String guesses, char guess) {
+        String newGuesses = "";
+        for (int i = 0; i < word.length(); ++i) {
+            if (word.charAt(i) == guess) {
+                newGuesses += guess + " ";
+            } else {
+                newGuesses += mid(guesses, i * 2, 2);
+            }
+        }
+        return newGuesses;
     }
 
     private boolean areBadGuessesValid(int badGuessCount) {

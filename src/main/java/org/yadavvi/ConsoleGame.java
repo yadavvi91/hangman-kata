@@ -33,26 +33,24 @@ public class ConsoleGame implements Game {
 
             if (isAlreadyGuessed(lettersUsed, guess)) {
                 ui.showAlreadyGuessed(guesses);
+            } else if (isAlreadyGuessed(matched, guess)) {
+                lettersUsed += guess;
+                String newGuesses = "";
+                for (int i = 0; i < word.length(); ++i) {
+                    if (word.charAt(i) == guess) {
+                        newGuesses += guess + " ";
+                    } else {
+                        newGuesses += mid(guesses, i * 2, 2);
+                    }
+                }
+                guesses = newGuesses;
+                matched = matched.replace(guess, '_');
             } else {
-                if (isAlreadyGuessed(matched, guess)) {
-                    lettersUsed += guess;
-                    String newGuesses = "";
-                    for (int i = 0; i < word.length(); ++i) {
-                        if (word.charAt(i) == guess) {
-                            newGuesses += guess + " ";
-                        } else {
-                            newGuesses += mid(guesses, i * 2, 2);
-                        }
-                    }
-                    guesses = newGuesses;
-                    matched = matched.replace(guess, '_');
-                } else {
-                    lettersUsed += guess;
-                    badGuessCount++;
-                    if (badGuessCount == 6) {
-                        ui.showGallows(badGuessCount);
-                        break;
-                    }
+                lettersUsed += guess;
+                badGuessCount++;
+                if (badGuessCount == 6) {
+                    ui.showGallows(badGuessCount);
+                    break;
                 }
             }
             if (isMatched(word, matched)) {

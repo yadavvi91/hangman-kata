@@ -1,6 +1,6 @@
 package org.yadavvi;
 
-public class Dictionary {
+public class FixedDictionary {
     String selectWord() {
         return "meatball";
     }

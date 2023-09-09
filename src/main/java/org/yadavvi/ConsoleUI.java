@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class UI {
+public class ConsoleUI {
 
     void showNextGuessPrompt(PrintStream out) {
         out.println("Your guess? ");

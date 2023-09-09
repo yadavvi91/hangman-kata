@@ -17,22 +17,22 @@ public class Main {
         InputStream in = System.in;
         PrintStream out = System.out;
 
-        Dictionary dictionary = new Dictionary();
-        UI ui = new UI();
+        FixedDictionary fixedDictionary = new FixedDictionary();
+        ConsoleUI consoleUi = new ConsoleUI();
 
-        String word = dictionary.selectWord();
+        String word = fixedDictionary.selectWord();
         String matched = word;
         String lettersUsed = "";
         String guesses = repeat("_ ", word.length());
         int badGuessCount = 0;
         while (badGuessCount < 6 && !matched.equals(repeat("_", word.length()))) {
-            ui.showGallows(badGuessCount, out);
-            ui.showGuesses(guesses, out);
-            ui.showNextGuessPrompt(out);
-            char guess = ui.getGuess(in);
+            consoleUi.showGallows(badGuessCount, out);
+            consoleUi.showGuesses(guesses, out);
+            consoleUi.showNextGuessPrompt(out);
+            char guess = consoleUi.getGuess(in);
 
             if (lettersUsed.indexOf(guess) >= 0) {
-                ui.showAlreadyGuessed(guesses, out);
+                consoleUi.showAlreadyGuessed(guesses, out);
             } else {
                 lettersUsed += guess;
                 if (matched.indexOf(guess) >= 0) {
@@ -49,15 +49,15 @@ public class Main {
                 } else {
                     ++badGuessCount;
                     if (badGuessCount == 6) {
-                        ui.showGallows(badGuessCount, out);
+                        consoleUi.showGallows(badGuessCount, out);
                         break;
                     }
                 }
             }
             if (matched.equals(repeat("_", word.length()))) {
-                ui.showGallows(badGuessCount, out);
-                ui.showGuesses(guesses, out);
-                ui.showYouWon(out);
+                consoleUi.showGallows(badGuessCount, out);
+                consoleUi.showGuesses(guesses, out);
+                consoleUi.showYouWon(out);
             }
         }
     }

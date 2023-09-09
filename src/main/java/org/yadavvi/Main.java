@@ -6,9 +6,9 @@ public class Main {
         Dictionary dictionary = new FixedDictionary();
         UI ui = new ConsoleUI(System.in, System.out);
 
-        ConsoleGame game = new ConsoleGame();
+        ConsoleGame game = new ConsoleGame(ui, dictionary);
 
-        game.play(dictionary, ui);
+        game.play();
     }
 
 }

@@ -2,6 +2,14 @@ package org.yadavvi;
 
 public class ConsoleGame implements Game {
 
+    private final UI ui;
+    private final Dictionary dictionary;
+
+    public ConsoleGame(UI ui, Dictionary dictionary) {
+        this.ui = ui;
+        this.dictionary = dictionary;
+    }
+
     private String mid(String text, int start, int length) {
         return text.substring(start, start + length);
     }
@@ -11,13 +19,13 @@ public class ConsoleGame implements Game {
     }
 
     @Override
-    public void play(Dictionary dictionary, UI ui) {
+    public void play() {
         String word = dictionary.selectWord();
         String matched = word;
         String lettersUsed = "";
-        String guesses = new ConsoleGame().repeat("_ ", word.length());
+        String guesses = repeat("_ ", word.length());
         int badGuessCount = 0;
-        while (badGuessCount < 6 && !matched.equals(new ConsoleGame().repeat("_", word.length()))) {
+        while (badGuessCount < 6 && !matched.equals(repeat("_", word.length()))) {
             ui.showGallows(badGuessCount);
             ui.showGuesses(guesses);
             ui.showNextGuessPrompt();
@@ -33,7 +41,7 @@ public class ConsoleGame implements Game {
                         if (word.charAt(i) == guess) {
                             newGuesses += guess + " ";
                         } else {
-                            newGuesses += new ConsoleGame().mid(guesses, i * 2, 2);
+                            newGuesses += mid(guesses, i * 2, 2);
                         }
                     }
                     guesses = newGuesses;
@@ -46,7 +54,7 @@ public class ConsoleGame implements Game {
                     }
                 }
             }
-            if (matched.equals(new ConsoleGame().repeat("_", word.length()))) {
+            if (matched.equals(repeat("_", word.length()))) {
                 ui.showGallows(badGuessCount);
                 ui.showGuesses(guesses);
                 ui.showYouWon();

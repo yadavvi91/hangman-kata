@@ -4,9 +4,6 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 public class Main {
-    private static String selectWord() {
-        return "meatball";
-    }
 
     private static String repeat(String text, int count) {
         return new String(new char[count]).replace("\0", text);
@@ -20,7 +17,7 @@ public class Main {
         InputStream in = System.in;
         PrintStream out = System.out;
 
-        String word = selectWord();
+        String word = new Dictionary().selectWord();
         UI ui = new UI();
 
         String matched = word;

@@ -5,6 +5,7 @@ public class ConsoleGame implements Game {
     private final UI ui;
     private final Dictionary dictionary;
     private final String word;
+    private final Provider provider;
     private String matched;
     private String lettersUsed;
     private String guesses;
@@ -13,6 +14,8 @@ public class ConsoleGame implements Game {
     public ConsoleGame(UI ui, Dictionary dictionary) {
         this.ui = ui;
         this.dictionary = dictionary;
+        this.provider = new AlreadyGuessedProvider(new CorrectGuessProvider(new BadGuessProvider()));
+
         word = this.dictionary.selectWord();
         matched = word;
         lettersUsed = "";
@@ -36,16 +39,7 @@ public class ConsoleGame implements Game {
             ui.showNextGuessPrompt();
             char guess = ui.getGuess();
 
-            if (isAlreadyGuessed(guess)) {
-                ui.showAlreadyGuessed(guesses);
-            } else if (isGuessACharInWord(guess)) {
-                lettersUsed += guess;
-                guesses = getNewGuesses(guess);
-                matched = matched.replace(guess, '_');
-            } else {
-                lettersUsed += guess;
-                badGuessCount++;
-            }
+            provider.doSomething(guess);
         }
         // is word correctly guessed
         if (isAMatch(word, matched)) {
@@ -85,5 +79,53 @@ public class ConsoleGame implements Game {
 
     private boolean isAMatch(String word, String matched) {
         return matched.equals(repeat("_", word.length()));
+    }
+
+    interface Provider {
+        void doSomething(char guess);
+    }
+
+    class AlreadyGuessedProvider implements Provider {
+        Provider next;
+
+        AlreadyGuessedProvider(Provider next) {
+            this.next = next;
+        }
+
+        @Override
+        public void doSomething(char guess) {
+            if (isAlreadyGuessed(guess)) {
+                ui.showAlreadyGuessed(guesses);
+            } else {
+                next.doSomething(guess);
+            }
+        }
+    }
+
+    class CorrectGuessProvider implements Provider {
+        Provider next;
+
+        CorrectGuessProvider(Provider next) {
+            this.next = next;
+        }
+
+        @Override
+        public void doSomething(char guess) {
+            if (isGuessACharInWord(guess)) {
+                lettersUsed += guess;
+                guesses = getNewGuesses(guess);
+                matched = matched.replace(guess, '_');
+            } else {
+                next.doSomething(guess);
+            }
+        }
+    }
+
+    class BadGuessProvider implements Provider {
+        @Override
+        public void doSomething(char guess) {
+            lettersUsed += guess;
+            badGuessCount++;
+        }
     }
 }

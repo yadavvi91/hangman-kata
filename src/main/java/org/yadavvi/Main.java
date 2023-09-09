@@ -17,9 +17,10 @@ public class Main {
         InputStream in = System.in;
         PrintStream out = System.out;
 
-        String word = new Dictionary().selectWord();
+        Dictionary dictionary = new Dictionary();
         UI ui = new UI();
 
+        String word = dictionary.selectWord();
         String matched = word;
         String lettersUsed = "";
         String guesses = repeat("_ ", word.length());

@@ -1,17 +1,21 @@
 package org.yadavvi;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class ConsoleUI implements UI {
 
     private final InputStream in;
     private final PrintStream out;
+    private Scanner scanner;
 
     public ConsoleUI(InputStream in, PrintStream out) {
         this.in = in;
         this.out = out;
+        this.scanner = new Scanner(in);
     }
 
     @Override
@@ -21,7 +25,7 @@ public class ConsoleUI implements UI {
 
     @Override
     public char getGuess() {
-        return new Scanner(in).nextLine().charAt(0);
+        return scanner.nextLine().charAt(0);
     }
 
     @Override

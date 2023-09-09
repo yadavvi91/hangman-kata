@@ -1,8 +1,5 @@
 package org.yadavvi;
 
-import java.io.InputStream;
-import java.io.PrintStream;
-
 public class Main {
 
     private static String repeat(String text, int count) {
@@ -14,11 +11,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        InputStream in = System.in;
-        PrintStream out = System.out;
-
         Dictionary dictionary = new FixedDictionary();
-        UI ui = new ConsoleUI(in, out);
+        UI ui = new ConsoleUI(System.in, System.out);
 
         String word = dictionary.selectWord();
         String matched = word;

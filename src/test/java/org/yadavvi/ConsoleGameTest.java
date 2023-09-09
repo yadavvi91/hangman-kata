@@ -4,11 +4,23 @@ import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ConsoleGameTest {
 
+    private String readFile(String path) throws IOException {
+        return Files.readString(Paths.get(path));
+    }
+
+    private String getCorrectWordString() throws IOException {
+        return readFile("src/test/resources/correct_word.txt");
+    }
+
     @Test
-    void test_correctWord() {
+    void test_correctWord() throws IOException {
         String str = "m\ne\na\nt\nb\na\nl\nl\n";
         InputStream in = new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8));
 
@@ -22,6 +34,10 @@ class ConsoleGameTest {
         // test that when the string input is `meatball`, the output is the thing printed.
         game.play();
 
-        System.out.println(outputStream.toString(StandardCharsets.UTF_8));
+        String actualResponse = outputStream.toString(StandardCharsets.UTF_8);
+        String expectedResponse = getCorrectWordString();
+
+        // System.out.println(actualResponse);
+        assertEquals(expectedResponse, actualResponse);
     }
 }

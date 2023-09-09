@@ -18,7 +18,7 @@ public class Main {
         PrintStream out = System.out;
 
         Dictionary dictionary = new FixedDictionary();
-        UI ui = new ConsoleUI();
+        UI ui = new ConsoleUI(in, out);
 
         String word = dictionary.selectWord();
         String matched = word;
@@ -26,13 +26,13 @@ public class Main {
         String guesses = repeat("_ ", word.length());
         int badGuessCount = 0;
         while (badGuessCount < 6 && !matched.equals(repeat("_", word.length()))) {
-            ui.showGallows(badGuessCount, out);
-            ui.showGuesses(guesses, out);
-            ui.showNextGuessPrompt(out);
-            char guess = ui.getGuess(in);
+            ui.showGallows(badGuessCount);
+            ui.showGuesses(guesses);
+            ui.showNextGuessPrompt();
+            char guess = ui.getGuess();
 
             if (lettersUsed.indexOf(guess) >= 0) {
-                ui.showAlreadyGuessed(guesses, out);
+                ui.showAlreadyGuessed(guesses);
             } else {
                 lettersUsed += guess;
                 if (matched.indexOf(guess) >= 0) {
@@ -49,15 +49,15 @@ public class Main {
                 } else {
                     ++badGuessCount;
                     if (badGuessCount == 6) {
-                        ui.showGallows(badGuessCount, out);
+                        ui.showGallows(badGuessCount);
                         break;
                     }
                 }
             }
             if (matched.equals(repeat("_", word.length()))) {
-                ui.showGallows(badGuessCount, out);
-                ui.showGuesses(guesses, out);
-                ui.showYouWon(out);
+                ui.showGallows(badGuessCount);
+                ui.showGuesses(guesses);
+                ui.showYouWon();
             }
         }
     }

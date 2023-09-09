@@ -1,18 +1,15 @@
 package org.yadavvi;
 
-import java.io.InputStream;
-import java.io.PrintStream;
-
 public interface UI {
-    void showNextGuessPrompt(PrintStream out);
+    void showNextGuessPrompt();
 
-    char getGuess(InputStream in);
+    char getGuess();
 
-    void showAlreadyGuessed(String guesses, PrintStream out);
+    void showAlreadyGuessed(String guesses);
 
-    void showYouWon(PrintStream out);
+    void showYouWon();
 
-    void showGuesses(String guesses, PrintStream out);
+    void showGuesses(String guesses);
 
-    void showGallows(int errorCount, PrintStream out);
+    void showGallows(int errorCount);
 }

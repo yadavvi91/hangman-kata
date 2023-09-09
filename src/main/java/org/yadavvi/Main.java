@@ -1,5 +1,7 @@
 package org.yadavvi;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Main {
@@ -15,165 +17,169 @@ public class Main {
         return text.substring(start, start + length);
     }
 
-    private static void showGallows(int errorCount) {
+    private static void showGallows(int errorCount, PrintStream out) {
         switch (errorCount) {
             case 0:
-                System.out.println("    +--------------+");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    +----------------------------+");
-                System.out.println("");
+                out.println("    +--------------+");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    +----------------------------+");
+                out.println("");
                 break;
 
             case 1:
-                System.out.println("    +--------------+");
-                System.out.println("    |             (*)");
-                System.out.println("    |              |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    +----------------------------+");
-                System.out.println("");
+                out.println("    +--------------+");
+                out.println("    |             (*)");
+                out.println("    |              |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    +----------------------------+");
+                out.println("");
                 break;
 
             case 2:
-                System.out.println("    +--------------+");
-                System.out.println("    |             (*)");
-                System.out.println("    |              |");
-                System.out.println("    |           +-----+");
-                System.out.println("    |            |   |");
-                System.out.println("    |            |   |");
-                System.out.println("    |            |   |");
-                System.out.println("    |           +-----+");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    +----------------------------+");
-                System.out.println("");
+                out.println("    +--------------+");
+                out.println("    |             (*)");
+                out.println("    |              |");
+                out.println("    |           +-----+");
+                out.println("    |            |   |");
+                out.println("    |            |   |");
+                out.println("    |            |   |");
+                out.println("    |           +-----+");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    +----------------------------+");
+                out.println("");
                 break;
 
             case 3:
-                System.out.println("    +--------------+");
-                System.out.println("    |             (*)");
-                System.out.println("    |              |");
-                System.out.println("    |           +-----+");
-                System.out.println("    |          / |   |");
-                System.out.println("    |         /  |   |");
-                System.out.println("    |        *   |   |");
-                System.out.println("    |           +-----+");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    +----------------------------+");
-                System.out.println("");
+                out.println("    +--------------+");
+                out.println("    |             (*)");
+                out.println("    |              |");
+                out.println("    |           +-----+");
+                out.println("    |          / |   |");
+                out.println("    |         /  |   |");
+                out.println("    |        *   |   |");
+                out.println("    |           +-----+");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    +----------------------------+");
+                out.println("");
                 break;
 
             case 4:
-                System.out.println("    +--------------+");
-                System.out.println("    |             (*)");
-                System.out.println("    |              |");
-                System.out.println("    |           +-----+");
-                System.out.println("    |          / |   | \\");
-                System.out.println("    |         /  |   |  \\");
-                System.out.println("    |        *   |   |   *");
-                System.out.println("    |           +-----+");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    +----------------------------+");
-                System.out.println("");
+                out.println("    +--------------+");
+                out.println("    |             (*)");
+                out.println("    |              |");
+                out.println("    |           +-----+");
+                out.println("    |          / |   | \\");
+                out.println("    |         /  |   |  \\");
+                out.println("    |        *   |   |   *");
+                out.println("    |           +-----+");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    |");
+                out.println("    +----------------------------+");
+                out.println("");
                 break;
 
             case 5:
-                System.out.println("    +--------------+");
-                System.out.println("    |             (*)");
-                System.out.println("    |              |");
-                System.out.println("    |           +-----+");
-                System.out.println("    |          / |   | \\");
-                System.out.println("    |         /  |   |  \\");
-                System.out.println("    |        *   |   |   *");
-                System.out.println("    |           +-----+");
-                System.out.println("    |          /");
-                System.out.println("    |         /");
-                System.out.println("    |         |");
-                System.out.println("    |         |");
-                System.out.println("    |        -+");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    +----------------------------+");
-                System.out.println("");
+                out.println("    +--------------+");
+                out.println("    |             (*)");
+                out.println("    |              |");
+                out.println("    |           +-----+");
+                out.println("    |          / |   | \\");
+                out.println("    |         /  |   |  \\");
+                out.println("    |        *   |   |   *");
+                out.println("    |           +-----+");
+                out.println("    |          /");
+                out.println("    |         /");
+                out.println("    |         |");
+                out.println("    |         |");
+                out.println("    |        -+");
+                out.println("    |");
+                out.println("    |");
+                out.println("    +----------------------------+");
+                out.println("");
                 break;
 
             case 6:
-                System.out.println("    +--------------+");
-                System.out.println("    |             (*)");
-                System.out.println("    |              |");
-                System.out.println("    |           +-----+");
-                System.out.println("    |          / |   | \\");
-                System.out.println("    |         /  |   |  \\");
-                System.out.println("    |        *   |   |   *");
-                System.out.println("    |           +-----+");
-                System.out.println("    |          /       \\");
-                System.out.println("    |         /         \\");
-                System.out.println("    |         |          |");
-                System.out.println("    |         |          |");
-                System.out.println("    |        -+          +-");
-                System.out.println("    |");
-                System.out.println("    |");
-                System.out.println("    +----------------------------+");
-                System.out.println("");
-                System.out.println("              YOU'VE BEEN HUNG");
+                out.println("    +--------------+");
+                out.println("    |             (*)");
+                out.println("    |              |");
+                out.println("    |           +-----+");
+                out.println("    |          / |   | \\");
+                out.println("    |         /  |   |  \\");
+                out.println("    |        *   |   |   *");
+                out.println("    |           +-----+");
+                out.println("    |          /       \\");
+                out.println("    |         /         \\");
+                out.println("    |         |          |");
+                out.println("    |         |          |");
+                out.println("    |        -+          +-");
+                out.println("    |");
+                out.println("    |");
+                out.println("    +----------------------------+");
+                out.println("");
+                out.println("              YOU'VE BEEN HUNG");
                 break;
         }
     }
 
     public static void main(String[] args) {
+        InputStream in = System.in;
+        PrintStream out = System.out;
+
         String word = selectWord();
+
         String matched = word;
         String lettersUsed = "";
         String guesses = repeat("_ ", word.length());
         int badGuessCount = 0;
         while (badGuessCount < 6 && !matched.equals(repeat("_", word.length()))) {
-            showGallows(badGuessCount);
-            System.out.println("Guesses: " + guesses);
+            showGallows(badGuessCount, out);
+            showGuesses(guesses, out);
+            showNextGuessPrompt(out);
+            char guess = getGuess(in);
 
-            System.out.println("Your guess? ");
-            char guess = new Scanner(System.in).nextLine().charAt(0);
             if (lettersUsed.indexOf(guess) >= 0) {
-                System.out.println("You've already guessed '" + guesses + "', try another letter.");
+                showAlreadyGuessed(guesses, out);
             } else {
                 lettersUsed += guess;
                 if (matched.indexOf(guess) >= 0) {
@@ -190,16 +196,36 @@ public class Main {
                 } else {
                     ++badGuessCount;
                     if (badGuessCount == 6) {
-                        showGallows(badGuessCount);
+                        showGallows(badGuessCount, out);
                         break;
                     }
                 }
             }
             if (matched.equals(repeat("_", word.length()))) {
-                showGallows(badGuessCount);
-                System.out.println("Guesses: " + guesses);
-                System.out.println("YOU WON!");
+                showGallows(badGuessCount, out);
+                showGuesses(guesses, out);
+                showYouWon(out);
             }
         }
+    }
+
+    private static void showYouWon(PrintStream out) {
+        out.println("YOU WON!");
+    }
+
+    private static void showAlreadyGuessed(String guesses, PrintStream out) {
+        out.println("You've already guessed '" + guesses + "', try another letter.");
+    }
+
+    private static char getGuess(InputStream in) {
+        return new Scanner(in).nextLine().charAt(0);
+    }
+
+    private static void showNextGuessPrompt(PrintStream out) {
+        out.println("Your guess? ");
+    }
+
+    private static void showGuesses(String guesses, PrintStream out) {
+        out.println("Guesses: " + guesses);
     }
 }

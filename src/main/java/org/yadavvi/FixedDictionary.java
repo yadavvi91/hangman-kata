@@ -1,7 +1,8 @@
 package org.yadavvi;
 
-public class FixedDictionary {
-    String selectWord() {
+public class FixedDictionary implements Dictionary {
+    @Override
+    public String selectWord() {
         return "meatball";
     }
 }

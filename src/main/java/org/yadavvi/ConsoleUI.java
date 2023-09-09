@@ -4,28 +4,34 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class ConsoleUI {
+public class ConsoleUI implements UI {
 
-    void showNextGuessPrompt(PrintStream out) {
+    @Override
+    public void showNextGuessPrompt(PrintStream out) {
         out.println("Your guess? ");
     }
 
-    char getGuess(InputStream in) {
+    @Override
+    public char getGuess(InputStream in) {
         return new Scanner(in).nextLine().charAt(0);
     }
 
-    void showAlreadyGuessed(String guesses, PrintStream out) {
+    @Override
+    public void showAlreadyGuessed(String guesses, PrintStream out) {
         out.println("You've already guessed '" + guesses + "', try another letter.");
     }
 
-    void showYouWon(PrintStream out) {
+    @Override
+    public void showYouWon(PrintStream out) {
         out.println("YOU WON!");
     }
 
-    void showGuesses(String guesses, PrintStream out) {
+    @Override
+    public void showGuesses(String guesses, PrintStream out) {
         out.println("Guesses: " + guesses);
     }
 
+    @Override
     public void showGallows(int errorCount, PrintStream out) {
         switch (errorCount) {
             case 0:

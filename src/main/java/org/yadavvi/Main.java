@@ -17,22 +17,22 @@ public class Main {
         InputStream in = System.in;
         PrintStream out = System.out;
 
-        FixedDictionary fixedDictionary = new FixedDictionary();
-        ConsoleUI consoleUi = new ConsoleUI();
+        Dictionary dictionary = new FixedDictionary();
+        UI ui = new ConsoleUI();
 
-        String word = fixedDictionary.selectWord();
+        String word = dictionary.selectWord();
         String matched = word;
         String lettersUsed = "";
         String guesses = repeat("_ ", word.length());
         int badGuessCount = 0;
         while (badGuessCount < 6 && !matched.equals(repeat("_", word.length()))) {
-            consoleUi.showGallows(badGuessCount, out);
-            consoleUi.showGuesses(guesses, out);
-            consoleUi.showNextGuessPrompt(out);
-            char guess = consoleUi.getGuess(in);
+            ui.showGallows(badGuessCount, out);
+            ui.showGuesses(guesses, out);
+            ui.showNextGuessPrompt(out);
+            char guess = ui.getGuess(in);
 
             if (lettersUsed.indexOf(guess) >= 0) {
-                consoleUi.showAlreadyGuessed(guesses, out);
+                ui.showAlreadyGuessed(guesses, out);
             } else {
                 lettersUsed += guess;
                 if (matched.indexOf(guess) >= 0) {
@@ -49,15 +49,15 @@ public class Main {
                 } else {
                     ++badGuessCount;
                     if (badGuessCount == 6) {
-                        consoleUi.showGallows(badGuessCount, out);
+                        ui.showGallows(badGuessCount, out);
                         break;
                     }
                 }
             }
             if (matched.equals(repeat("_", word.length()))) {
-                consoleUi.showGallows(badGuessCount, out);
-                consoleUi.showGuesses(guesses, out);
-                consoleUi.showYouWon(out);
+                ui.showGallows(badGuessCount, out);
+                ui.showGuesses(guesses, out);
+                ui.showYouWon(out);
             }
         }
     }

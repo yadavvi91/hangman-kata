@@ -5,7 +5,7 @@ public interface UI {
 
     char getGuess();
 
-    void showAlreadyGuessed(String guesses);
+    void showAlreadyGuessed(char guess);
 
     void showYouWon();
 

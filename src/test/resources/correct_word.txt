@@ -112,7 +112,7 @@ Your guess?
 
 Guesses: m e a t b a _ _ 
 Your guess? 
-You've already guessed 'm e a t b a _ _ ', try another letter.
+You've already guessed 'a', try another letter.
     +--------------+
     |
     |

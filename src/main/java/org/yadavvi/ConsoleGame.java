@@ -95,7 +95,7 @@ public class ConsoleGame implements Game {
         @Override
         public void doSomething(char guess) {
             if (isAlreadyGuessed(guess)) {
-                ui.showAlreadyGuessed(guesses);
+                ui.showAlreadyGuessed(guess);
             } else {
                 next.doSomething(guess);
             }

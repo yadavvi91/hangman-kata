@@ -150,7 +150,7 @@ Your guess?
 
 Guesses: m _ _ _ b _ l l 
 Your guess? 
-You've already guessed 'm _ _ _ b _ l l ', try another letter.
+You've already guessed 'l', try another letter.
     +--------------+
     |             (*)
     |              |

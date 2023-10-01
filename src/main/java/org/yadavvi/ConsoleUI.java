@@ -29,8 +29,8 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public void showAlreadyGuessed(String guesses) {
-        out.println("You've already guessed '" + guesses + "', try another letter.");
+    public void showAlreadyGuessed(char guess) {
+        out.println("You've already guessed '" + guess + "', try another letter.");
     }
 
     @Override
